@@ -1,4 +1,4 @@
-# OpenRouter DeepSeek Chatbot (Streamlit Edition)
+# ABCAB Chatbot (Streamlit Edition)
 
 A modern web-based chatbot using OpenRouter's DeepSeek model, with a Python Flask backend and a Streamlit frontend. Now with Retrieval-Augmented Generation (RAG) and full backend trace logging.
 
