@@ -1,12 +1,14 @@
-# ABCAB Chatbot (Streamlit Edition)
+# OpenRouter DeepSeek Chatbot (Streamlit Edition)
 
 A modern web-based chatbot using OpenRouter's DeepSeek model, with a Python Flask backend and a Streamlit frontend. Now with Retrieval-Augmented Generation (RAG) and full backend trace logging.
 
 ## Features
 - Secure API key management via `.env` file
 - Flask backend for model communication
-- Retrieval-Augmented Generation (RAG):
-  - For every user prompt, the backend fetches relevant web results using the Serper API and augments the LLM context for up-to-date answers
+- Retrieval-Augmented Generation (RAG) with Smart Fallback:
+  - The backend analyzes the LLM's response for signs of outdated or insufficient knowledge (e.g., "real-time access", "current weather", "I recommend checking", and many more fallback phrases).
+  - If the LLM cannot answer or indicates a knowledge cutoff, the UI prompts the user for approval to perform a web search.
+  - Upon approval, the backend fetches relevant web results using the Serper API and augments the LLM context for up-to-date answers
 - Streamlit chat UI with:
   - Clean, interactive chat interface
   - Markdown-style formatting for bot responses
@@ -57,6 +59,7 @@ This will launch the Streamlit chat UI in your browser (usually at [http://local
 - All backend processing steps are logged in `chatbot.log` for traceability.
 - The Streamlit frontend formats bot responses with markdown-like styling for readability.
 - The raw model response (including reasoning, tokens, etc.) is available in the UI for each message.
+- The backend first tries to answer using the LLM alone. If the answer is insufficient or indicates outdated knowledge (using an expanded set of fallback phrases), the UI will prompt you to approve a web search. If you approve, the backend fetches web results and re-asks the LLM with this new context for a more accurate answer.
 
 ## Troubleshooting
 - **API Key not set:** Make sure your `.env` file is present and correct.
